@@ -1,0 +1,462 @@
+/* AuthLayoutPannel*/
+.AuthLayout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+.leftContainer {
+    flex: 1;
+    display: flex;
+    background-color: #1e40af;
+    height: 100vh;
+    max-width: 45%;
+    padding-left: 70px;
+    justify-content: center;
+    align-items: center;
+}
+.mainLTitle {
+    color: #fff;
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+.subLTitle {
+    color: #fff;
+    font-size: 20px;
+}
+
+
+
+/*Auth general*/
+.signingRoot {
+    flex: 1;
+    display: flex;
+    background-color: #F8FAFC;
+    justify-content: center;
+}
+
+.signingDiv {
+    align-content: center;
+    justify-content: center;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+.text-input {
+    padding: 15px;
+    border: 1px solid #737686;
+    border-radius: 7px;
+}
+.divider {
+    width: 320px;
+    height: 1px;
+    background-color: rgb(153, 153, 153);
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+.signinBtn {
+    padding: 15px;
+    border-radius: 7px;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+.link:visited {
+    color: inherit;
+}
+.link:hover {
+    text-decoration: none;
+}
+
+
+
+.signinMeta {
+    margin-top: 20px;
+    justify-self: center;
+}
+.signinMeta span {
+    margin-right: 10px;
+}
+
+
+
+/* sign in root*/
+.signInDiv{
+    padding: 80px;
+    background-color: #fff;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    max-width: 480px;
+}
+.titleImg {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.signinTitle {
+    font-size: 34px;
+    font-weight: bold;
+    color: #191B23;
+    margin-bottom: 7px;
+    justify-self: center;
+}
+.signinDesc {
+    font-size: 18px;
+    color: #434655;
+    margin-bottom: 30px;
+    justify-self: center;
+    text-align: center;
+}
+.signinBtn {
+    width: 100%;
+    background-color: #2563eb;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16;
+    border-radius: 8;
+    height: 44;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8;
+}
+
+
+
+
+
+
+
+/* SignUp Page Styles */
+.SignUpCard {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(26, 86, 219, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+    padding: 40px 36px 28px 36px;
+    max-width: 670px;
+    width: 100%;
+    min-width: 380px;
+}
+.line {
+    align-self: center  ;
+    width: 100px;
+    height: 1px;
+    background-color: rgb(153, 153, 153);
+}
+.SignUpStepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    gap: 0.5rem;
+}
+.SignUpStep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 500;
+}
+.SignUpStepActive {
+    color: #2563eb;
+}
+.SignUpStepCircle {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    background: #e0e7ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.SignUpStepActive .SignUpStepCircle {
+    border: 5px solid #ebe9fd;
+    width: 50px;
+    height: 50px;
+    background: #2563eb;
+    color: #fff;
+}
+.SignUpStepLabel {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.SignUpFormSection {
+    margin-top: 8px;
+}
+.SignUpFormTitle {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 7px;
+    color: #222b45;
+}
+.SignUpFormSubtitle {
+    font-size: 16px;
+    color: #64748b;
+    margin-bottom: 25px;
+}
+.SignUpForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.SignUpFormRow {
+    display: flex;
+    gap: 16px;
+}
+.SignUpFormField {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 10px;
+}
+.SignUpInput {
+    height: 42px;
+    border-radius: 8px;
+    border: 1.5px solid #e5e7eb;
+    padding: 0 12px;
+    font-size: 15px;
+    background: #f8fafc;
+    color: #222b45;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+.SignUpInput:focus {
+    border-color: #2563eb;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.08);
+}
+.SignUpButton {
+    margin-top: 18px;
+    width: 100%;
+    height: 44px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+}
+.SignUpButton:hover {
+    background: #1e40af;
+}
+.SignUpFooter {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+    color: #64748b;
+}
+.SignUpFooterLink {
+    color: #2563eb;
+    font-weight: 600;
+    margin-left: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.SignUpFooterLink:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+/*step 2*/
+/*  **********************************************************************************************************************  */
+/* Profile Upload */
+.ProfileUploadContainer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.ProfileUploadCircle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 26px;
+}
+
+.CameraIcon {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+.ProfileUploadText {
+    font-size: 14px;
+    color: #64748b;
+    max-width: 400px;
+}
+
+/* Upload Box */
+.UploadBox {
+    border: 2px dashed #cbd5f5;
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    background: #f8fafc;
+}
+
+.UploadIcon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.UploadText {
+    font-size: 14px;
+    color: #374151;
+}
+
+.UploadSubText {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.UploadLink {
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+/* Helper */
+.HelperText {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 6px;
+}
+
+/* Upload Buttons */
+.UploadButton {
+    flex: 1;
+    height: 44px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Info Box */
+.InfoBox {
+    background: #dcfce7;
+    color: #166534;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Back Button */
+.BackButton {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+}
+
+
+
+
+/*step 3*/
+/* Section Headers */
+.SectionHeader {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 18px;
+}
+
+/* Divider */
+.FormDivider {
+    width: 100%;
+    height: 1px;
+    background-color: #e5e7eb;
+    margin: 20px 0;
+}
+
+/* Textarea */
+.SignUpTextarea {
+    min-height: 120px;
+    border-radius: 8px;
+    border: 1.5px solid #e5e7eb;
+    padding: 10px 12px;
+    font-size: 15px;
+    background: #f8fafc;
+    resize: none;
+    outline: none;
+}
+
+.SignUpTextarea:focus {
+    border-color: #2563eb;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.08);
+}
+
+/* Alternate Back Button */
+.BackButtonAlt {
+    background: #e5e7eb;
+    border: none;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Primary Full Button */
+.PrimaryWideButton {
+    background: #1d4ed8;
+    color: #fff;
+    border: none;
+    height: 44px;
+    padding: 0 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    min-width: 260px;
+}
+
+.PrimaryWideButton:hover {
+    background: #1e40af;
+}
+
+/* Footer note */
+.SecureNote {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #94a3b8;
+}
