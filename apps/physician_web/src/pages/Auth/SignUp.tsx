@@ -1,11 +1,15 @@
 import '../../styles/auth.css'
 import  { Outlet, useLocation } from 'react-router'
+import { useState } from 'react';
 
+import type { SignUpForm } from '../../AuthHandles/handles';
+import { InitialSignUpForm } from '../../AuthHandles/handles';
 
 function SignUp() {
     const location = useLocation()
     const currentStep = location.state?.currentStep || 1;
 
+    const [formData , setFormData] = useState<SignUpForm>(InitialSignUpForm);
 
     return (
         <div className="signingRoot">
@@ -34,7 +38,7 @@ function SignUp() {
                             <span className="SignUpStepLabel">Profile</span>
                         </div>
                     </div>
-                    < Outlet />
+                    < Outlet context={{formData, setFormData}} />
                 </div>
             </div>
         </div>
