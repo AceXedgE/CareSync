@@ -119,8 +119,7 @@ function SignUpStep1 (){
             </div>
           </div>
           <Link to="step2" className="link" state={{ currentStep: 2 }}>
-            <button
-              className="SignUpButton btn"
+            <button className="SignUpButton btn"
               type="submit"
               style={{ marginTop: "18px" }}
             >

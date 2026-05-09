@@ -37,6 +37,7 @@
     background-color: #F8FAFC;
     justify-content: center;
     overflow-y: scroll;
+    z-index: 1;
 }
 
 .signingDiv {
@@ -164,7 +165,7 @@ label {
     padding: 40px 36px 28px 36px;
     max-width: 670px;
     width: 100%;
-    min-width: 380px;
+    min-width: 480px;
 }
 .line {
     align-self: center  ;
@@ -342,6 +343,15 @@ label {
     font-size: 28px;
     margin-bottom: 10px;
 }
+.GhanaCardUpload {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border: 1px dashed rgb(231, 231, 231);
+    border-radius: 18px;
+    width: 100%;
+    align-items: center;
+}
 
 .UploadText {
     font-size: 14px;
@@ -473,4 +483,361 @@ label {
 }
 .placeImageOverlay {
     max-width: 300px;
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   SignUpPreview.css
+   Only styles NOT already present in the shared Auth CSS file.
+   All class names use PascalCase per project convention.
+   ============================================================ */
+
+/* ── Profile header ── */
+.PreviewProfileHeader {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+    border: 1.5px solid #dbeafe;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+}
+
+.PreviewAvatarWrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.PreviewAvatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #2563eb;
+}
+
+.PreviewAvatarFallback {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #93c5fd;
+}
+
+.PreviewAvatarBadge {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    background: #16a34a;
+    color: #fff;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+}
+
+.PreviewProfileMeta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.PreviewProfileName {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.PreviewProfileEmail {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ── Section dividers ── */
+.PreviewSectionDivider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 16px;
+}
+
+.PreviewSectionDivider::before,
+.PreviewSectionDivider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.PreviewSectionDividerLabel {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+/* ── Key-value field grid ── */
+.PreviewGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+}
+
+@media (max-width: 520px) {
+    .PreviewGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.PreviewField {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+.PreviewFieldLabel {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+
+.PreviewFieldValue {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1e293b;
+    word-break: break-word;
+}
+
+.PreviewFieldEmpty {
+    color: #cbd5e1;
+    font-style: italic;
+}
+
+/* ── Image preview row ── */
+.PreviewImageRow {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.PreviewImageBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: #f8fafc;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    min-width: 120px;
+    flex: 1;
+    max-width: 200px;
+}
+
+.PreviewImageThumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1.5px solid #dbeafe;
+}
+
+.PreviewImagePlaceholder {
+    width: 80px;
+    height: 80px;
+    background: #e5e7eb;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.PreviewImageIcon {
+    font-size: 28px;
+    opacity: 0.5;
+}
+
+.PreviewImageLabel {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    text-align: center;
+}
+
+.PreviewImageFileName {
+    font-size: 11px;
+    color: #16a34a;
+    text-align: center;
+    word-break: break-all;
+    max-width: 130px;
+}
+
+/* ── Biography ── */
+.PreviewBiography {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    min-height: 80px;
+}
+
+.PreviewBiographyText {
+    font-size: 15px;
+    color: #374151;
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+/* ── Action row ── */
+.PreviewActions {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    align-items: center;
+}
+
+
+
+
+/* ── CertificationPreview ── */
+.CertPreviewCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    flex: 2;
+    background: #f8fafc;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 18px;
+    /*max-width: 200px;*/
+}
+
+.CertPreviewLeft {
+    flex-shrink: 0;
+}
+
+.CertPreviewThumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1.5px solid #dbeafe;
+}
+
+.CertPreviewBadge {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CertPreviewBadgeText {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.CertPreviewRight {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.CertPreviewLabel {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+
+.CertPreviewFileName {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.CertPreviewSize {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.CertPreviewViewLink {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    border: 1.5px solid #2563eb;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-top: 4px;
+    align-self: flex-start;
+    transition: background 0.15s, color 0.15s;
+}
+
+.CertPreviewViewLink:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+.CertPreviewEmpty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 2;
+    background: #f8fafc;
+    border: 1.5px dashed #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 18px;
+    min-height: 108px;
+}
+
+.CertPreviewEmptyIcon {
+    font-size: 28px;
+    opacity: 0.4;
+}
+
+.CertPreviewEmptyText {
+    font-size: 13px;
+    color: #cbd5e1;
 }

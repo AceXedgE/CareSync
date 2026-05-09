@@ -6,6 +6,7 @@ import SignUpStep1 from "../pages/Auth/SignUpStep1"
 import SignUpStep2 from "../pages/Auth/SignUpStep2"
 import SignUpStep3 from "../pages/Auth/SignUpStep3"
 import AuthLayout from '../pages/Auth/AuthLayout'
+import Preview from "../pages/Auth/Preview"
 
 
 function AppRoutes () {
@@ -16,6 +17,7 @@ function AppRoutes () {
           <Route index element={<SignUpStep1 />} />
           <Route path="step2" element={<SignUpStep2 />} />
           <Route path="step3" element={<SignUpStep3 />} />
+          <Route path="preview" element={<Preview />} />
         </Route>
         <Route index element={<SignIn />} />
       </Route>

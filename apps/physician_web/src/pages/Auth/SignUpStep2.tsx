@@ -105,7 +105,10 @@ function SignUpStep2() {
                   {formData.proofOfCertification.name}{" "}
                 </div>
                 <input {...fileInputProps} />
-                <div className="UploadLink" onClick={handleChooseFile}> change files?</div>
+                <div className="UploadLink" onClick={handleChooseFile}>
+                  {" "}
+                  change files?
+                </div>
               </div>
             ) : (
               <div
@@ -114,7 +117,8 @@ function SignUpStep2() {
                 onDrop={(e) =>
                   handleDrop(e, setIsDragging, (file) => {
                     setFormData((prev) => ({
-                      ...prev, proofOfCertification: file,
+                      ...prev,
+                      proofOfCertification: file,
                     }));
                   })
                 }
@@ -126,8 +130,10 @@ function SignUpStep2() {
                     PDF, PNG, or JPG (max. 10MB)
                   </span>
                 </div>
-                <input {...fileInputProps} />
-                <div className="UploadLink" onClick={handleChooseFile} >or browse files</div>
+                <input {...fileInputProps} accept="*" />
+                <div className="UploadLink" onClick={handleChooseFile}>
+                  or browse files
+                </div>
               </div>
             )}
           </div>
@@ -141,10 +147,25 @@ function SignUpStep2() {
           <label>Ghana Card (National ID)</label>
           <div className="SignUpFormRow">
             <input {...GhanaCardImgProps} />
-            <button type="button" className="UploadButton" onClick={handleGhanaCardImg}
-            >
-              🪪 Click Upload Image
-            </button>
+            {formData.ghanacardImg ? (
+              <div className="GhanaCardUpload" onClick={handleGhanaCardImg}>
+                <img
+                  style={{ width: "100px" }}
+                  src={URL.createObjectURL(formData.ghanacardImg)}
+                />
+                <span style={{ color: "blue", cursor: "pointer" }}>
+                  click to change Image
+                </span>
+              </div>
+            ) : (
+              <button
+                className="UploadButton"
+                type="button"
+                onClick={handleGhanaCardImg}
+              >
+                🪪 Click Upload Image
+              </button>
+            )}
           </div>
         </div>
 
@@ -155,17 +176,15 @@ function SignUpStep2() {
         </div>
 
         {/* Actions */}
-        <div
-          className="SignUpFormRow"
-          style={{ marginTop: 10 }}
-        >
+        <div className="SignUpFormRow" style={{ marginTop: 10 }}>
           <NavLink to="../" className="link" state={{ currentStep: 1 }}>
             <button type="button" className="BackButton btn">
               ← Back
             </button>
           </NavLink>
           <NavLink className="link" to="../step3" state={{ currentStep: 3 }}>
-            <button className="SignUpButton btn"
+            <button
+              className="SignUpButton btn"
               type="submit"
               style={{ maxWidth: 200 }}
             >

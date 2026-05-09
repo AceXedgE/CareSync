@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { useOutletContext } from "react-router";
 import type { SignUpOutletContext } from "../../AuthHandles/handles";
 import { handleDragOver, handleDrop, handleDragLeave, useFileChooser } from "../../AuthHandles/fileUpload";
@@ -18,12 +18,14 @@ function SignUpStep3() {
         <div className="SignUpFormRow">
           <div className="SignUpFormField">
             <label>Hospital / Pharmacy Name</label>
-            <input className="SignUpInput"
+            <input
+              className="SignUpInput"
               placeholder="e.g. Central Health Medical"
               value={formData.placeName}
               onChange={(e) => {
                 setFormData((prev) => ({
-                  ...prev, placeName: e.target.value,
+                  ...prev,
+                  placeName: e.target.value,
                 }));
               }}
             />
@@ -31,12 +33,14 @@ function SignUpStep3() {
 
           <div className="SignUpFormField">
             <label>Location</label>
-            <input className="SignUpInput"
+            <input
+              className="SignUpInput"
               placeholder="📍 City, State"
               value={formData.placeLocation}
               onChange={(e) => {
                 setFormData((prev) => ({
-                  ...prev, placeLocation: e.target.value,
+                  ...prev,
+                  placeLocation: e.target.value,
                 }));
               }}
             />
@@ -55,28 +59,35 @@ function SignUpStep3() {
                   alt="default"
                 />
                 <input {...fileInputProps} />
-                <div className="UploadLink" onClick={handleChooseFile}>Click to change image</div>
+                <div className="UploadLink" onClick={handleChooseFile}>
+                  Click to change image
+                </div>
               </div>
             ) : (
               <>
-              <input {...fileInputProps} />
-              <div
-                onClick={handleChooseFile}
-                onDragOver={e => {handleDragOver(e, setIsDragging)}}
-                onDragLeave={e => {handleDragLeave(e, setIsDragging)}}
-                onDrop={e => {handleDrop(e,setIsDragging, 
-                  (file) => {setFormData((prev) => ({...prev, placeImg: file})
-                  )}
-                )}}
-              >
-                <div className="UploadIcon">☁️</div>
-                <div className="UploadText">
-                  Click to upload or drag and drop
+                <input {...fileInputProps} />
+                <div
+                  onClick={handleChooseFile}
+                  onDragOver={(e) => {
+                    handleDragOver(e, setIsDragging);
+                  }}
+                  onDragLeave={(e) => {
+                    handleDragLeave(e, setIsDragging);
+                  }}
+                  onDrop={(e) => {
+                    handleDrop(e, setIsDragging, (file) => {
+                      setFormData((prev) => ({ ...prev, placeImg: file }));
+                    });
+                  }}
+                >
+                  <div className="UploadIcon">☁️</div>
+                  <div className="UploadText">
+                    Click to upload or drag and drop
+                  </div>
+                  <div className="UploadSubText">
+                    SVG, PNG, JPG or GIF (max. 5MB)
+                  </div>
                 </div>
-                <div className="UploadSubText">
-                  SVG, PNG, JPG or GIF (max. 5MB)
-                </div>
-              </div>
               </>
             )}
           </div>
@@ -89,10 +100,13 @@ function SignUpStep3() {
 
         <div className="SignUpFormField">
           <label>Bio / Professional Summary</label>
-          <textarea className="SignUpTextarea"
+          <textarea
+            className="SignUpTextarea"
             placeholder="Briefly describe your medical expertise and professional background..."
             value={formData.biography}
-            onChange={e => {setFormData((prev) => ({...prev, biography: e.target.value}))}}
+            onChange={(e) => {
+              setFormData((prev) => ({ ...prev, biography: e.target.value }));
+            }}
           />
           <div className="HelperText">
             Minimum 150 characters. Professional use only.
@@ -100,17 +114,18 @@ function SignUpStep3() {
         </div>
 
         {/* Actions */}
-        <div className="SignUpFormRow"
-          style={{ marginTop: 20 }}>
+        <div className="SignUpFormRow" style={{ marginTop: 20 }}>
           <NavLink to="../step2" className="link" state={{ currentStep: 2 }}>
             <button type="button" className="BackButton btn">
               ← Back
             </button>
           </NavLink>
 
-          <button type="submit" className="PrimaryWideButton">
-            Complete Registration ✓
-          </button>
+          <Link to="../preview" state={{ currentStep: 4 }}>
+            <button type="submit" className="PrimaryWideButton">
+              Complete Registration ✓
+            </button>
+          </Link>
         </div>
 
         {/* Footer note */}
