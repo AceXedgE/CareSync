@@ -1,0 +1,29 @@
+{
+    "name": "@caresync/mobile-ui",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+      }
+    },
+    "files": ["dist", "src"],
+    "private": true,
+    "scripts": {
+      "build": "tsc"
+    },
+    "dependencies": {
+        "react-native-svg": "^15.15.4"
+    },
+    "peerDependencies": {
+        "react": "*",
+        "react-native": "*"
+    },
+    "devDependencies": {
+        "typescript": "*",
+        "@types/react": "*"
+    }
+}

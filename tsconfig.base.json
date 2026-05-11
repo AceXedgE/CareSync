@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "ignoreDeprecations": "6.0",
+
+    "baseUrl": ".",
+
+    "paths": {
+      "@/*": ["apps/*"],
+      "@caresync/mobile-ui": ["packages/mobile_ui/src"],
+      "@caresync/shared": ["packages/shared/src"]
+    }
+  }
+}

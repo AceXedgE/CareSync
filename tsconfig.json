@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "files": [],
+  "references": [
+    { "path": "./apps/client_mobile" },
+    { "path": "./apps/physician_mobile" },
+    { "path": "./apps/physician_web" },
+    { "path": "./packages/shared" },
+    { "path": "./packages/mobile_ui" }
+  ]
+}

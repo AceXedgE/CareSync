@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Vite
+.vite/
+
+# Expo (mobile apps)
+.expo/
+.expo-shared/
+
+# React Native
+android/build/
+ios/build/
+
+# pnpm store (optional if using global store)
+.pnpm-store/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc caches
+.cache/
+.turbo/

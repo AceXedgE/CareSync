@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import styles from "../components/styles/AuthStyles";
+import styles from "../../../packages/mobile_ui/src/styles/AuthStyles";
 
 const SignInScreen: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -14,13 +14,13 @@ const SignInScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       {/* Logo */}
-      <Text style={styles.logo}>CareSync</Text>
 
+      <Text style={styles.logo}>CareSync</Text>
       {/* Card */}
       <View style={styles.card}>
         <Text style={styles.title}>Welcome Back</Text>
         <Text style={styles.subtitle}>
-          Access your medical dashboard
+          Sign in to access your medical records and care schedule.
         </Text>
 
         {/* Email */}
@@ -52,10 +52,18 @@ const SignInScreen: React.FC = () => {
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Sign In →</Text>
         </TouchableOpacity>
+        <View>
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Google</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Sign In →</Text>
+          </TouchableOpacity>
+        </View>
 
         {/* Footer */}
         <Text style={styles.footerText}>
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Text style={styles.link}>Join CareSync</Text>
         </Text>
       </View>
