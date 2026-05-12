@@ -25,13 +25,6 @@ const AuthStyles = StyleSheet.create({
     fontSize: 15,
   },
 
-  logo: {
-    fontSize: 22,
-    fontWeight: "600",
-    color: "#2563EB",
-    marginBottom: 20,
-  },
-
   card: {
     width: "93%",
     backgroundColor: "#FFFFFF",
@@ -159,6 +152,144 @@ const AuthStyles = StyleSheet.create({
     color: "#2563EB",
     fontWeight: "600",
   },
+
+  /*  ***************************************************** */
+
+  TopBar: {
+  width: "100%",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  paddingHorizontal: 20,
+  paddingVertical: 16,
+  backgroundColor: "#FFFFFF",
+  borderBottomWidth: 1,
+  borderBottomColor: "#E5E7EB",
+},
+
+InputWrapper: {
+  flexDirection: "row",
+  alignItems: "center",
+  borderWidth: 1,
+  borderColor: "#D1D5DB",
+  borderRadius: 10,
+  paddingHorizontal: 14,
+  backgroundColor: "#F9FAFB",
+  marginBottom: 18,
+},
+
+InputField: {
+  flex: 1,
+  paddingVertical: 12,
+  paddingHorizontal: 10,
+  fontSize: 16,
+  color: "#111827",
+},
+
+ButtonContent: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+},
+
+DividerRow: {
+  flexDirection: "row",
+  alignItems: "center",
+  marginTop: 24,
+  marginBottom: 22,
+},
+
+DividerLine: {
+  flex: 1,
+  height: 1,
+  backgroundColor: "#D1D5DB",
+},
+
+DividerText: {
+  marginHorizontal: 10,
+  color: "#6B7280",
+  fontSize: 13,
+},
+
+SocialRow: {
+  flexDirection: "row",
+  gap: 12,
+  marginBottom: 22,
+},
+
+SocialButton: {
+  flex: 1,
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  borderWidth: 1,
+  borderColor: "#D1D5DB",
+  borderRadius: 10,
+  paddingVertical: 12,
+  backgroundColor: "#FFFFFF",
+  gap: 8,
+},
+
+SocialButtonText: {
+  fontSize: 15,
+  color: "#374151",
+  fontWeight: "500",
+},
+
+AppleIcon: {
+  fontSize: 18,
+  color: "#111827",
+  fontWeight: "700",
+},
+
+SecuritySection: {
+  alignItems: "center",
+  marginBottom: 25,
+},
+
+SecurityIconsRow: {
+  flexDirection: "row",
+  gap: 20,
+  marginBottom: 10,
+},
+
+SecurityText: {
+  fontSize: 11,
+  color: "#9CA3AF",
+  letterSpacing: 1,
+  textAlign: "center",
+},
+
+BottomFooter: {
+  width: "100%",
+  paddingTop: 20,
+  paddingBottom: 10,
+  borderTopWidth: 1,
+  borderTopColor: "#E5E7EB",
+  alignItems: "center",
+},
+
+CopyrightText: {
+  fontSize: 12,
+  color: "#6B7280",
+  marginBottom: 16,
+  textAlign: "center",
+},
+
+FooterLinksRow: {
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  gap: 14,
+  paddingHorizontal: 20,
+},
+
+FooterLink: {
+  color: "#64748B",
+  fontSize: 12,
+  textDecorationLine: "underline",
+},
 });
 
 export default AuthStyles;

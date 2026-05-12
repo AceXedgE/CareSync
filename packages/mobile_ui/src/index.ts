@@ -1,4 +1,9 @@
 // @caresync/mobile-ui - Mobile UI components
 // Re-export from styles and other components
 
-export * from "../styles/AuthStyles";
+import AuthStyles from "./styles/AuthStyles";
+export{ AuthStyles as styles}
+
+
+import GoogleImg from "./images/Google.png";
+export { GoogleImg };

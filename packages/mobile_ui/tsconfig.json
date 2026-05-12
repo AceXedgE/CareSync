@@ -10,6 +10,6 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx","../../global.d.ts",],
   "exclude": ["node_modules"]
 }

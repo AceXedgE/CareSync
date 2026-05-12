@@ -20,7 +20,8 @@
     },
     "peerDependencies": {
         "react": "*",
-        "react-native": "*"
+        "react-native": "*",
+        "lucide-react-native": "*"
     },
     "devDependencies": {
         "typescript": "*",
