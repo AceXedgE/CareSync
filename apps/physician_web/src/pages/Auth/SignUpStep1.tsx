@@ -1,6 +1,6 @@
 import { Link } from "react-router"
 import { useOutletContext } from "react-router"
-import type { SignUpOutletContext } from '../../AuthHandles/handles';
+import type { SignUpOutletContext } from '@caresync/shared';
 
 
 

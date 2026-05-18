@@ -14,5 +14,13 @@
   "private": true,
   "scripts": {
     "build": "tsc"
-  }
+  },
+  "peerDependencies": {
+        "react": "*",
+        "react-native": "*"
+    },
+    "devDependencies": {
+        "typescript": "*",
+        "@types/react": "*"
+    }
 }

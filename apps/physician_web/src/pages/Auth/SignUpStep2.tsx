@@ -3,7 +3,7 @@ import type { SignUpOutletContext } from "../../AuthHandles/handles";
 import WebcamModal from "./(modals)/WebcamModal";
 import { useState } from "react";
 import { handleDragOver, handleDrop, handleDragLeave, useFileChooser } from "../../AuthHandles/fileUpload";
-import { dataURLtoFile } from "../../AuthHandles/handles";
+import { dataURLtoFile } from "@caresync/shared";
 
 function SignUpStep2() {
   const { formData, setFormData } = useOutletContext<SignUpOutletContext>();

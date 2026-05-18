@@ -293,3 +293,157 @@ FooterLink: {
 });
 
 export default AuthStyles;
+
+
+
+
+
+
+
+
+export const phyAuthStyles = StyleSheet.create({
+  stepRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "93%",
+    marginBottom: 20,
+    marginTop: 6,
+  },
+  stepItem: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  stepCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "#E5E7EB",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 6,
+  },
+  stepCircleActive: {
+    backgroundColor: "#2563EB",
+  },
+  stepNumber: {
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 14,
+  },
+  stepLabel: {
+    fontSize: 13,
+    color: "#9CA3AF",
+    marginRight: 8,
+  },
+  stepLabelActive: {
+    color: "#2563EB",
+    fontWeight: "600",
+  },
+  stepLine: {
+    width: 28,
+    height: 1,
+    backgroundColor: "#D1D5DB",
+    marginHorizontal: 6,
+  },
+  pageTitle: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#111827",
+    marginBottom: 4,
+  },
+  pageSubtitle: {
+    fontSize: 15,
+    color: "#6B7280",
+  },
+  sectionLabel: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#2563EB",
+    letterSpacing: 0.8,
+    marginBottom: 16,
+  },
+  uploadRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    borderStyle: "dashed",
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 12,
+    backgroundColor: "#F9FAFB",
+    gap: 10,
+  },
+  uploadIconWrap: {
+    width: 40,
+    height: 40,
+    borderRadius: 8,
+    backgroundColor: "#EFF6FF",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  uploadTitle: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#374151",
+  },
+  uploadHint: {
+    fontSize: 11,
+    color: "#9CA3AF",
+    marginTop: 2,
+  },
+  uploadBtn: {
+    borderWidth: 1,
+    borderColor: "#2563EB",
+    borderRadius: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+  },
+  uploadBtnText: {
+    color: "#2563EB",
+    fontWeight: "600",
+    fontSize: 13,
+  },
+  avatarWrap: {
+    position: "relative",
+    marginBottom: 8,
+  },
+  avatarPlaceholder: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: "#DBEAFE",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 3,
+    borderColor: "#BFDBFE",
+  },
+  avatarIconBg: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cameraBtn: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: "#2563EB",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#FFFFFF",
+  },
+  avatarLabel: {
+    fontSize: 13,
+    color: "#6B7280",
+  },
+  bioHint: {
+    fontSize: 12,
+    color: "#9CA3AF",
+    fontStyle: "italic",
+    marginBottom: 0,
+  },
+});

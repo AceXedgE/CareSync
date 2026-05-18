@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, Pressable } from "react-native";
 import {SafeAreaView } from "react-native-safe-area-context"
 import { Mail, Lock, Eye, Shield, ArrowRight,} from "lucide-react-native";
 import { styles, GoogleImg, } from "@caresync/mobile-ui";
 import { Header} from "../components/Header"
+import { router } from "expo-router";
+import {ClientSignUpForm, initSignUpForm} from "@caresync/shared"
 
 const SignInScreen: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [signInForm, SetSignInForm] =
+    useState<ClientSignUpForm>(initSignUpForm);
 
   const handleLogin = (): void => {
-    console.log("Email:", email);
-    console.log("Password:", password);
+    console.log("Email:", signInForm?.email);
+    console.log("Password:", signInForm?.password);
   };
 
   return (
     <View>
-      <Header />
+      <Header navigation={""} />
       <SafeAreaView style={styles.container}>
 
         {/* Card */}
@@ -36,8 +38,8 @@ const SignInScreen: React.FC = () => {
               placeholder="name@example.com"
               placeholderTextColor="#9CA3AF"
               style={styles.InputField}
-              value={email}
-              onChangeText={setEmail}
+              value={signInForm.email}
+              onChangeText={(text) => {SetSignInForm((prev) => ({...prev, email: text }))} }
               keyboardType="email-address"
               autoCapitalize="none"
               />
@@ -60,8 +62,8 @@ const SignInScreen: React.FC = () => {
               placeholderTextColor="#9CA3AF"
               secureTextEntry
               style={styles.InputField}
-              value={password}
-              onChangeText={setPassword}
+              value={signInForm.password}
+              onChangeText={(password) => {SetSignInForm((prev)=> ({...prev, password}))}}
               />
 
             <TouchableOpacity>
@@ -100,7 +102,9 @@ const SignInScreen: React.FC = () => {
           {/* Footer */}
           <Text style={styles.footerText}>
             Don&apos;t have an account?{" "}
-            <Text style={styles.link}>Create Account</Text>
+            <Pressable onPress={() => router.replace("/SignUpScreen")}>
+              <Text style={styles.link}>Create Account</Text>
+            </Pressable>
           </Text>
         </View>
 

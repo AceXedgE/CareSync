@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router";
 import { useOutletContext } from "react-router";
-import type { SignUpOutletContext } from "../../AuthHandles/handles";
+import type { SignUpOutletContext } from "@caresync/shared";
 import { handleDragOver, handleDrop, handleDragLeave, useFileChooser } from "../../AuthHandles/fileUpload";
 import { useState } from "react";
 

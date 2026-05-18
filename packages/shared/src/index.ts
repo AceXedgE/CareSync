@@ -2,3 +2,5 @@
 // Add your shared exports here
 
 export const version = "1.0.0";
+
+export * from "./logic/AuthHandles"

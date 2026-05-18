@@ -2,8 +2,8 @@ import '../../styles/auth.css'
 import  { Outlet, useLocation } from 'react-router'
 import { useState } from 'react';
 
-import type { SignUpForm } from '../../AuthHandles/handles';
-import { InitialSignUpForm } from '../../AuthHandles/handles';
+import type { SignUpForm } from '@caresync/shared';
+import { InitialSignUpForm } from '@caresync/shared';
 
 function SignUp() {
     const location = useLocation()
