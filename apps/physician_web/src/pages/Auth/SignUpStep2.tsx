@@ -36,7 +36,7 @@ function SignUpStep2() {
     setFormData({
       ...formData,
       profileImg: dataURLtoFile(
-        imageSrc, `${formData.fname}${formData.lname}.jpg`,
+        imageSrc, `${formData.fname}${formData.lname}${formData.email}.jpg`,
       ),
     });
     setIsModalOpen(false);

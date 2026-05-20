@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView,
-         Platform, } from "react-native";
+         Platform,Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Mail, Phone, Lock, Eye, EyeOff, MapPin, FileText, CreditCard, Camera, ArrowRight,
 } from "lucide-react-native";
 import { styles, phyAuthStyles } from "@caresync/mobile-ui";
 import { SignUpForm, InitialSignUpForm} from "@caresync/shared"
 import { Header } from "../components/Header";
-import { useDoctorDocumentUpload } from "../hooks/fileHandler";
+import { useDoctorDocumentUpload, useImagePickers } from "../hooks/fileHandler";
 import { router } from "expo-router";
+import { previewFormImages, initialFormImages } from "../hooks/previewImage";
 
 
 const SignUpScreen: React.FC<{ navigation?: any }> = ({ navigation }) => {
   const [form, setForm] = useState<SignUpForm>(InitialSignUpForm);
+  const [previewForm, setPreviewForm] = useState<previewFormImages>(initialFormImages)
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { pickCertificate, pickGhanaCard, pickProfileImage } = useDoctorDocumentUpload();
+  const { pickCertificate} = useDoctorDocumentUpload();
+  const { pickImage } = useImagePickers();
 
   const update = (field: keyof SignUpForm, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -24,7 +27,9 @@ const SignUpScreen: React.FC<{ navigation?: any }> = ({ navigation }) => {
   const handleCompleteRegistration = () => {
     router.push({
       pathname: "/Preview",
-      params: { form: JSON.stringify(form) },
+      params: { form: JSON.stringify(form),
+        previewForm: JSON.stringify(previewForm)
+       },
     }); };
 
   return (
@@ -242,58 +247,188 @@ const SignUpScreen: React.FC<{ navigation?: any }> = ({ navigation }) => {
 
               <Text style={styles.label}>Mandatory Documents</Text>
 
-              {/* Medical Certificate Upload */}
-              <View style={phyAuthStyles.uploadRow}>
-                <View style={phyAuthStyles.uploadIconWrap}>
-                  <FileText size={22} color="#2563EB" />
+              {/* ************************Medical Certificate Upload************************* */}
+              {previewForm.proofOfCertification ? (
+                <View style={phyAuthStyles.uploadRow}>
+                  <View style={phyAuthStyles.uploadIconWrap}>
+                    <FileText size={22} color="#0cf56d" />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={phyAuthStyles.uploadTitle}>File Uploaded</Text>
+                    <Text style={phyAuthStyles.uploadHint}>
+                      File Name: {previewForm.proofOfCertificationName}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    style={phyAuthStyles.uploadBtn}
+                    onPress={async () => {
+                      const file = await pickCertificate();
+                      if (file) {
+                        setPreviewForm((prev) => ({
+                          ...prev,
+                          proofOfCertification: file.uri,
+                          proofOfCertificationName: file.name,
+                        }));
+                      }
+                    }}
+                  >
+                    <Text style={phyAuthStyles.uploadBtnText}>
+                      Change Upload
+                    </Text>
+                  </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={phyAuthStyles.uploadTitle}>
-                    Medical Certificate
-                  </Text>
-                  <Text style={phyAuthStyles.uploadHint}>
-                    PDF, JPG (Max 5MB)
-                  </Text>
+              ) : (
+                <View style={phyAuthStyles.uploadRow}>
+                  <View style={phyAuthStyles.uploadIconWrap}>
+                    <FileText size={22} color="#2563EB" />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={phyAuthStyles.uploadTitle}>
+                      Medical Certificate
+                    </Text>
+                    <Text style={phyAuthStyles.uploadHint}>
+                      PDF, JPG (Max 5MB)
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    style={phyAuthStyles.uploadBtn}
+                    onPress={async () => {
+                      const file = await pickCertificate();
+                      if (file)
+                        setPreviewForm((prev) => ({
+                          ...prev,
+                          proofOfCertification: file.uri,
+                          proofOfCertificationName: file.name
+                        }));
+                    }}
+                  >
+                    <Text style={phyAuthStyles.uploadBtnText}>Upload</Text>
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  style={phyAuthStyles.uploadBtn}
-                  onPress={async () => {
-                    const file = await pickCertificate();
-                    if (file)
-                      setForm((prev) => ({
-                        ...prev,
-                        proofOfCertification: file,
-                      }));
-                  }}
-                >
-                  <Text style={phyAuthStyles.uploadBtnText}>Upload</Text>
-                </TouchableOpacity>
-              </View>
+              )}
 
-              {/* Ghana Card Upload */}
-              <View style={[phyAuthStyles.uploadRow, { marginBottom: 0 }]}>
-                <View style={phyAuthStyles.uploadIconWrap}>
-                  <CreditCard size={22} color="#2563EB" />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={phyAuthStyles.uploadTitle}>
-                    Ghana Card (Front)
-                  </Text>
-                  <Text style={phyAuthStyles.uploadHint}>
-                    Clear photo required
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  style={phyAuthStyles.uploadBtn}
-                  onPress={async () => {
-                    const file = await pickGhanaCard();
-                    if (file)
-                      setForm((prev) => ({ ...prev, ghanacardImg: file }));
-                  }}
+              {/* ***************Ghana Card Upload********************* */}
+              {previewForm.ghanaCardImage ? (
+                <View
+                  style={[
+                    phyAuthStyles.uploadRow,
+                    {
+                      marginBottom: 12,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    },
+                  ]}
                 >
-                  <Text style={phyAuthStyles.uploadBtnText}>Upload</Text>
-                </TouchableOpacity>
-              </View>
+                  <Image
+                    source={{ uri: previewForm.ghanaCardImage }}
+                    style={{ width: 200, height: 170 }}
+                    resizeMode="stretch"
+                  />
+                  <TouchableOpacity
+                    style={phyAuthStyles.uploadBtn}
+                    onPress={async () => {
+                      const uri = await pickImage();
+                      if (uri)
+                        setPreviewForm((prev) => ({
+                          ...prev,
+                          ghanaCardImage: uri,
+                        }));
+                    }}
+                  >
+                    <Text style={phyAuthStyles.uploadBtnText}>
+                      change Image?
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <View style={[phyAuthStyles.uploadRow, { marginBottom: 12 }]}>
+                  <View style={phyAuthStyles.uploadIconWrap}>
+                    <CreditCard size={22} color="#2563EB" />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={phyAuthStyles.uploadTitle}>
+                      Ghana Card (Front)
+                    </Text>
+                    <Text style={phyAuthStyles.uploadHint}>
+                      Clear photo required
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    style={phyAuthStyles.uploadBtn}
+                    onPress={async () => {
+                      const url = await pickImage();
+                      if (url)
+                        setPreviewForm((prev) => ({ ...prev, ghanaCardImage: url }));
+                    }}
+                  >
+                    <Text style={phyAuthStyles.uploadBtnText}>Upload</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              {/* ******************************image of location************************** */}
+              {previewForm.placeImage ? (
+                <View
+                  style={[
+                    phyAuthStyles.uploadRow,
+                    {
+                      marginBottom: 0,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    },
+                  ]}
+                >
+                  <Image
+                    source={{ uri: previewForm.placeImage }}
+                    style={{ width: 200, height: 170 }}
+                    resizeMode="stretch"
+                  />
+                  <TouchableOpacity
+                    style={phyAuthStyles.uploadBtn}
+                    onPress={async () => {
+                      const uri = await pickImage();
+                      if (uri)
+                        setPreviewForm((prev) => ({
+                          ...prev,
+                          placeImage: uri,
+                        }));
+                    }}
+                  >
+                    <Text style={phyAuthStyles.uploadBtnText}>
+                      change Image?
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <View style={[phyAuthStyles.uploadRow, { marginBottom: 0 }]}>
+                  <View style={phyAuthStyles.uploadIconWrap}>
+                    <CreditCard size={22} color="#2563EB" />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={phyAuthStyles.uploadTitle}>
+                      Image Of Practice
+                    </Text>
+                    <Text style={phyAuthStyles.uploadHint}>
+                      Clear photo required
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    style={phyAuthStyles.uploadBtn}
+                    onPress={async () => {
+                      const uri = await pickImage();
+                      if (uri)
+                        setPreviewForm((prev) => ({
+                          ...prev,
+                          placeImage: uri,
+                        }));
+                    }}
+                  >
+                    <Text style={phyAuthStyles.uploadBtnText}>Upload</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
 
             {/* ── SECTION 4: Patient-Facing Profile ── */}
@@ -313,9 +448,12 @@ const SignUpScreen: React.FC<{ navigation?: any }> = ({ navigation }) => {
                   <TouchableOpacity
                     style={phyAuthStyles.cameraBtn}
                     onPress={async () => {
-                      const file = await pickProfileImage();
-                      if (file)
-                        setForm((prev) => ({ ...prev, profileImg: file }));
+                      const url = await pickImage();
+                      if (url)
+                        setPreviewForm((prev) => ({
+                          ...prev,
+                          profileImage: url,
+                        }));
                     }}
                   >
                     <Camera size={14} color="#FFFFFF" />
@@ -362,7 +500,6 @@ const SignUpScreen: React.FC<{ navigation?: any }> = ({ navigation }) => {
                 {
                   width: "93%",
                   flexDirection: "row",
-                  justifyContent: "center",
                   alignItems: "center",
                   gap: 8,
                 },

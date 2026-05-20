@@ -62,7 +62,11 @@ export const dataURLtoFile = ( dataUrl: string, fileName: string): File => {
 
 // apps/physician_mobile/utils/dataURLtoFile.native.ts
 
-export const mobileDataURLtoFile = (base64: string, fileName: string, mimeType: string): File => {
+export const mobileDataURLtoFile = (
+  base64: string,
+  fileName: string,
+  mimeType: string
+): File => {
   const dataUrl = `data:${mimeType};base64,${base64}`;
   return new File([dataUrl], fileName, { type: mimeType });
 };

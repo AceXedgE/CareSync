@@ -1,12 +1,15 @@
-import React from "react";
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, } from "react-native";
+import React, { useEffect, useState, useMemo } from "react";
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Image, } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { User, Mail, Phone, Lock, Building2, MapPin, FileText, CreditCard, Camera, 
-         CheckCircle, ArrowLeft, Send, } from "lucide-react-native";
+import { User, Mail, Phone, Lock, Building2, MapPin, FileText, CreditCard, 
+        Camera, CheckCircle, ArrowLeft, Send, } from "lucide-react-native";
 import { styles } from "@caresync/mobile-ui";
 import { Header } from "../components/Header";
 import { SignUpForm, InitialSignUpForm } from "@caresync/shared";
+import { previewFormImages, initialFormImages } from "../hooks/previewImage";
 import { router, useLocalSearchParams } from "expo-router";
+import { useUriToFile } from "../hooks/fileHandler";
+import { buildFileName } from "../hooks/fileNameHandler";
 
 const maskPassword = (pw: string) => "•".repeat(Math.min(pw.length, 10));
 
@@ -36,37 +39,139 @@ const DocRow: React.FC<{
   icon: React.ReactNode;
   label: string;
   uploaded: boolean;
-}> = ({ icon, label, uploaded }) => (
-  <View style={local.docRow}>
-    <View style={local.rowIcon}>{icon}</View>
-    <Text style={local.rowValue}>{label}</Text>
+  previewUri?: string | null;
+}> = ({ icon, label, uploaded, previewUri }) => (
+  <View
+    style={[
+      local.docRow,
+      { flexDirection: "column", alignItems: "flex-start" },
+    ]}
+  >
     <View
-      style={[
-        local.docBadge,
-        uploaded ? local.docBadgeSuccess : local.docBadgeMissing,
-      ]}
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        width: "100%",
+        gap: 10,
+      }}
     >
-      <Text
+      <View style={local.rowIcon}>{icon}</View>
+      <Text style={[local.rowValue, { flex: 1 }]}>{label}</Text>
+      <View
         style={[
-          local.docBadgeText,
-          uploaded ? { color: "#16A34A" } : { color: "#DC2626" },
+          local.docBadge,
+          uploaded ? local.docBadgeSuccess : local.docBadgeMissing,
         ]}
       >
-        {uploaded ? "Uploaded" : "Missing"}
-      </Text>
+        <Text
+          style={[
+            local.docBadgeText,
+            uploaded ? { color: "#16A34A" } : { color: "#DC2626" },
+          ]}
+        >
+          {uploaded ? "Uploaded" : "Missing"}
+        </Text>
+      </View>
     </View>
+
+    {uploaded && previewUri && (
+      <Image
+        source={{ uri: previewUri }}
+        style={local.previewImage}
+        resizeMode="stretch"
+      />
+    )}
   </View>
 );
 
 const Preview: React.FC = () => {
-  const { form: formParam } = useLocalSearchParams();
-  const form: SignUpForm = formParam
-    ? JSON.parse(formParam as string)
-    : InitialSignUpForm;
+  const { uriToFile } = useUriToFile();
+  const [finalForm, setFinalForm] = useState<SignUpForm>(InitialSignUpForm);
+
+  const { form: formParam, previewForm: previewParam } = useLocalSearchParams();
+  const form = useMemo<SignUpForm>(
+    () => (formParam ? JSON.parse(formParam as string) : InitialSignUpForm),
+    [formParam],
+  );
+
+  const previewForm = useMemo<previewFormImages>(
+    () =>
+      previewParam ? JSON.parse(previewParam as string) : initialFormImages,
+    [previewParam],
+  );
 
   const fullName = [form.fname, form.othername, form.lname]
     .filter(Boolean)
     .join(" ");
+
+  useEffect(() => {
+    const convertImages = async () => {
+      const updated = { ...form };
+
+      const { proofOfCertification, ghanaCardImage, placeImage, profileImage } =
+        previewForm;
+
+      if (typeof proofOfCertification === "string") {
+        updated.proofOfCertification = await uriToFile(
+          proofOfCertification,
+          buildFileName(
+            form.fname,
+            form.lname,
+            form.email,
+            "certificate",
+            "application/pdf",
+          ),
+          "application/pdf",
+        );
+      }
+
+      if (typeof ghanaCardImage === "string") {
+        updated.ghanacardImg = await uriToFile(
+          ghanaCardImage,
+          buildFileName(
+            form.fname,
+            form.lname,
+            form.email,
+            "ghana_card",
+            "image/jpeg",
+          ),
+          "image/jpeg",
+        );
+      }
+
+      if (typeof placeImage === "string") {
+        updated.placeImg = await uriToFile(
+          placeImage,
+          buildFileName(
+            form.fname,
+            form.lname,
+            form.email,
+            "place",
+            "image/jpeg",
+          ),
+          "image/jpeg",
+        );
+      }
+
+      if (typeof profileImage === "string") {
+        updated.profileImg = await uriToFile(
+          profileImage,
+          buildFileName(
+            form.fname,
+            form.lname,
+            form.email,
+            "profile",
+            "image/jpeg",
+          ),
+          "image/jpeg",
+        );
+      }
+
+      setFinalForm(updated);
+    };
+
+    convertImages();
+  }, [previewForm, uriToFile, form]);
 
   const handleSubmit = () => {
     // TODO: wire up registration API call
@@ -99,13 +204,19 @@ const Preview: React.FC = () => {
           {/* Profile Summary */}
           <View style={local.profileCard}>
             <View style={local.avatarCircle}>
-              {form.profileImg ? null : (
+              {finalForm.profileImg ? (
+                <Image
+                  source={{ uri: previewForm.profileImage }}
+                  style={{ width: 90, height: 90, borderRadius: 45 }}
+                  resizeMode="cover"
+                />
+              ) : (
                 <Text style={{ fontSize: 36 }}>👨‍⚕️</Text>
               )}
             </View>
             <Text style={local.profileName}>{fullName || "Dr. —"}</Text>
             <Text style={local.profileSub}>
-              {form.placeName || "Practice not specified"}
+              {finalForm.placeName || "Practice not specified"}
             </Text>
             <View style={local.profileBadge}>
               <Text style={local.profileBadgeText}>
@@ -124,11 +235,11 @@ const Preview: React.FC = () => {
               value={fullName || "—"}
               faded={!fullName}
             />
-            {form.othername ? (
+            {finalForm.othername ? (
               <Row
                 icon={<User size={18} color="#6B7280" />}
                 label="Other Name"
-                value={form.othername}
+                value={finalForm.othername}
               />
             ) : null}
           </View>
@@ -140,20 +251,22 @@ const Preview: React.FC = () => {
             <Row
               icon={<Mail size={18} color="#2563EB" />}
               label="Email Address"
-              value={form.email || "—"}
-              faded={!form.email}
+              value={finalForm.email || "—"}
+              faded={!finalForm.email}
             />
             <Row
               icon={<Phone size={18} color="#2563EB" />}
               label="Phone Number"
-              value={form.phoneNumber || "—"}
-              faded={!form.phoneNumber}
+              value={finalForm.phoneNumber || "—"}
+              faded={!finalForm.phoneNumber}
             />
             <Row
               icon={<Lock size={18} color="#2563EB" />}
               label="Password"
-              value={form.password ? maskPassword(form.password) : "—"}
-              faded={!form.password}
+              value={
+                finalForm.password ? maskPassword(finalForm.password) : "—"
+              }
+              faded={!finalForm.password}
             />
           </View>
 
@@ -164,28 +277,41 @@ const Preview: React.FC = () => {
             <Row
               icon={<Building2 size={18} color="#2563EB" />}
               label="Hospital / Pharmacy"
-              value={form.placeName || "—"}
-              faded={!form.placeName}
+              value={finalForm.placeName || "—"}
+              faded={!finalForm.placeName}
             />
             <Row
               icon={<MapPin size={18} color="#2563EB" />}
               label="Practice Location"
-              value={form.placeLocation || "—"}
-              faded={!form.placeLocation}
+              value={finalForm.placeLocation || "—"}
+              faded={!finalForm.placeLocation}
             />
 
             <Text style={[local.rowLabel, { marginBottom: 10, marginTop: 4 }]}>
               Mandatory Documents
             </Text>
+
+            {/* Medical Certificate — no image preview */}
             <DocRow
               icon={<FileText size={18} color="#2563EB" />}
               label="Medical Certificate"
-              uploaded={!!form.proofOfCertification}
+              uploaded={!!finalForm.proofOfCertification}
             />
+
+            {/* Ghana Card — shows image preview */}
             <DocRow
               icon={<CreditCard size={18} color="#2563EB" />}
-              label="Ghana Card (Front/Back)"
-              uploaded={!!form.ghanacardImg}
+              label="Ghana Card (Front)"
+              uploaded={!!finalForm.ghanacardImg}
+              previewUri={previewForm.ghanaCardImage}
+            />
+
+            {/* Practice Image — shows image preview */}
+            <DocRow
+              icon={<FileText size={18} color="#2563EB" />}
+              label="Practice Image"
+              uploaded={!!finalForm.placeImg}
+              previewUri={previewForm.placeImage}
             />
           </View>
 
@@ -202,7 +328,7 @@ const Preview: React.FC = () => {
                 <View
                   style={[
                     local.docBadge,
-                    form.profileImg
+                    finalForm.profileImg
                       ? local.docBadgeSuccess
                       : local.docBadgeMissing,
                     { alignSelf: "flex-start", marginTop: 4 },
@@ -211,12 +337,12 @@ const Preview: React.FC = () => {
                   <Text
                     style={[
                       local.docBadgeText,
-                      form.profileImg
+                      finalForm.profileImg
                         ? { color: "#16A34A" }
                         : { color: "#DC2626" },
                     ]}
                   >
-                    {form.profileImg ? "Uploaded" : "Not uploaded"}
+                    {finalForm.profileImg ? "Uploaded" : "Not uploaded"}
                   </Text>
                 </View>
               </View>
@@ -227,13 +353,13 @@ const Preview: React.FC = () => {
               <Text
                 style={[
                   local.bioText,
-                  !form.biography && {
+                  !finalForm.biography && {
                     color: "#9CA3AF",
                     fontStyle: "italic",
                   },
                 ]}
               >
-                {form.biography || "No bio provided."}
+                {finalForm.biography || "No bio provided."}
               </Text>
             </View>
           </View>
@@ -342,6 +468,7 @@ const local = StyleSheet.create({
     borderWidth: 3,
     borderColor: "#BFDBFE",
     marginBottom: 12,
+    overflow: "hidden",
   },
   profileName: {
     fontSize: 20,
@@ -402,8 +529,6 @@ const local = StyleSheet.create({
     fontWeight: "500",
   },
   docRow: {
-    flexDirection: "row",
-    alignItems: "center",
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#F3F4F6",
@@ -426,6 +551,12 @@ const local = StyleSheet.create({
   docBadgeText: {
     fontSize: 12,
     fontWeight: "600",
+  },
+  previewImage: {
+    width: "100%",
+    height: 160,
+    borderRadius: 10,
+    marginTop: 10,
   },
   bioBox: {
     marginTop: 12,
